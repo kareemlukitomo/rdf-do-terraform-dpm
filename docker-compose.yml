@@ -1,0 +1,20 @@
+version: '3'
+services:
+  atlantis:
+    image: ghcr.io/runatlantis/atlantis:latest
+    container_name: atlantis
+    ports:
+      - "4141:4141"
+    volumes:
+      - atlantis-data:/atlantis-data
+    environment:
+      - ATLANTIS_PORT=4141
+      - ATLANTIS_GH_WEBHOOK_SECRET=your_webhook_secret
+      - ATLANTIS_GH_TOKEN=your_github_token
+      - ATLANTIS_GH_USER=your_github_username
+      - ATLANTIS_REPO_ALLOWLIST=github.com/ryakadev/rdf-do-terraform-dpm
+    restart: unless-stopped
+    command: server
+
+volumes:
+  atlantis-data:
